@@ -3,6 +3,7 @@ package me.akay.movies.dependencyInjection
 import dagger.Module
 import dagger.Provides
 import me.akay.movies.BuildConfig
+import me.akay.movies.network.AppInterceptor
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -34,6 +35,8 @@ class NetworkModule {
             .connectTimeout(15, TimeUnit.SECONDS)
             .readTimeout(15, TimeUnit.SECONDS)
             .followRedirects(false)
+
+
         interceptors.forEach {
             clientBuilder.addInterceptor(it)
         }
@@ -53,6 +56,7 @@ class NetworkModule {
             }
         }
         interceptors.add(loggingInterceptor)
+        interceptors.add(AppInterceptor())
         return interceptors
     }
 }
