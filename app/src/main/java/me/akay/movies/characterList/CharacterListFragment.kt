@@ -34,11 +34,15 @@ class CharacterListFragment : DaggerFragment(), CharacterAdapterDelegate {
 
     private lateinit var adapter: CharacterAdapter
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        adapter = CharacterAdapter(this, requestManager)
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val rootView = inflater.inflate(R.layout.fragment_character_list, container, false)
 
         recyclerView = rootView.findViewById(R.id.rv_character)
-        adapter = CharacterAdapter(this, requestManager)
         recyclerView.adapter = adapter
 
         loadingProgressBar = rootView.findViewById(R.id.pb_character)
