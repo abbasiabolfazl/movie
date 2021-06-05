@@ -1,5 +1,7 @@
 package me.akay.movies.network
 
+import me.akay.movies.BuildConfig
+import me.akay.movies.helper.MD5Util
 import okhttp3.HttpUrl
 import okhttp3.Interceptor
 import okhttp3.Request
@@ -7,14 +9,17 @@ import okhttp3.Response
 
 
 class AppInterceptor : Interceptor {
+    private var timeString: String = System.currentTimeMillis().toString()
+    private var hash: String = MD5Util.md5(timeString + BuildConfig.PRIVATE_KEY + BuildConfig.PUBLIC_KEY)
+
     override fun intercept(chain: Interceptor.Chain): Response {
         var request = chain.request()
         val originalHttpUrl: HttpUrl = request.url
 
         val url: HttpUrl = originalHttpUrl.newBuilder()
-            .addQueryParameter("ts", "1622732471")
-            .addQueryParameter("apikey", "463ad30f7f54e2c99f697ce0a7e5a00f")
-            .addQueryParameter("hash", "bbc278bdd02952e17d40d8a158357944")
+            .addQueryParameter("ts", timeString)
+            .addQueryParameter("apikey", BuildConfig.PUBLIC_KEY)
+            .addQueryParameter("hash", hash)
             .build()
 
         val builder: Request.Builder = request.newBuilder()
