@@ -50,6 +50,16 @@ data class Thumbnail(
             .append(extension)
             .toString()
     }
+
+    fun getBannerThumb(): String {
+        return StringBuilder()
+            .append(path)
+            .append("/")
+            .append("portrait_xlarge")
+            .append(".")
+            .append(extension)
+            .toString()
+    }
 }
 
 data class Character(
@@ -75,7 +85,8 @@ data class Series(
 
 data class ItemsItem(
     val name: String? = null,
-    val resourceURI: String? = null
+    val resourceURI: String? = null,
+    val type: String? = null
 )
 
 data class Comics(

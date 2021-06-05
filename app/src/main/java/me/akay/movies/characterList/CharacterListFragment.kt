@@ -1,11 +1,14 @@
 package me.akay.movies.characterList
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.RequestManager
@@ -19,7 +22,7 @@ import javax.inject.Inject
 class CharacterListFragment : DaggerFragment(), CharacterAdapterDelegate {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
-    private val viewModel: CharacterViewModel by viewModels { viewModelFactory }
+    private val viewModel: CharacterListViewModel by viewModels { viewModelFactory }
 
 
     private lateinit var recyclerView: RecyclerView
@@ -69,6 +72,14 @@ class CharacterListFragment : DaggerFragment(), CharacterAdapterDelegate {
     }
 
     override fun onClicked(character: Character) {
+        Log.i("abbasi", "onClicked: ${character.name}")
 
+        val bundle = bundleOf(
+            "id" to character.id,
+            "name" to character.name,
+            "imageUrl" to character.thumbnail?.getBannerThumb()
+        )
+
+        findNavController().navigate(R.id.characterFragment, bundle)
     }
 }

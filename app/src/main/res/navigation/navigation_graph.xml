@@ -6,5 +6,13 @@
     <fragment
         android:id="@+id/characterListFragment"
         android:name="me.akay.movies.characterList.CharacterListFragment"
-        android:label="CharacterListFragment" />
+        android:label="CharacterListFragment">
+        <action
+            android:id="@+id/action_characterListFragment_to_characterFragment"
+            app:destination="@id/characterFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/characterFragment"
+        android:name="me.akay.movies.character.CharacterFragment"
+        android:label="CharacterFragment" />
 </navigation>

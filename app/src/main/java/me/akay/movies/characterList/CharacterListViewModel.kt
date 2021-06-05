@@ -10,7 +10,7 @@ import me.akay.movies.helper.Resource
 import java.util.*
 import javax.inject.Inject
 
-class CharacterViewModel @Inject constructor(private val characterRepository: CharacterRepository) : BaseViewModel() {
+class CharacterListViewModel @Inject constructor(private val characterRepository: CharacterRepository) : BaseViewModel() {
     private val pagination = PublishProcessor.create<Int>()
     private var page = 0
 
